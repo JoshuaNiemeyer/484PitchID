@@ -3,27 +3,34 @@
 # TODO redefine positive and negative to use non-boolean data
 
 # helper to generate data all scores use. reduces computation time
-def genPerformanceScores(predicted, actual):
-    # measure data for variables used for calculations
-    falsePositives = 0
-    truePositives = 0
-    trueNegatives = 0
-    falseNegatives = 0
-    for i in range(len(predicted)):
-        # true
-        if (predicted[i] == actual[i]):
-            # true positive
-            if (predicted[i] == 1):
-                truePositives += 1
-            # true negative
-            else:
-                trueNegatives += 1
-        # false positive
-        elif (predicted[i] == 1):
-            falsePositives += 1
-        # false negative
-        elif (predicted[i] == 0):
-            falseNegatives += 1
+# the ID to check for the positive and negative identification of.
+# run for every ID and sum to get total score for all scores except
+# accuracy, where pos/neg distinction doesn't factor into formula.
+def genPerformanceScores(predicted, actual, numIDs = 1): # TODO change to the number of pitcher IDs we analyze
+    # run for every ID
+    for IDnum in range(numIDs):
+        # measure data for variables used for calculations
+        falsePositives = 0
+        truePositives = 0
+        trueNegatives = 0
+        falseNegatives = 0
+        for i in range(len(predicted)):
+            # true
+            if (predicted[i] == actual[i]):
+                # true positive
+                if (predicted[i] == IDnum):
+                    truePositives += 1
+                # true negative
+                else:
+                    trueNegatives += 1
+            # false positive
+            elif (predicted[i] == 1):
+                falsePositives += 1
+            # false negative
+            elif (predicted[i] == 0):
+                falseNegatives += 1
+
+    # return a sumation of each type for every ID type
     return falsePositives, truePositives, trueNegatives, falseNegatives
 
 # givenScores is optional pregenerated information from another call to a score function. reduces calculation time significantly.
