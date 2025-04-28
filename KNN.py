@@ -5,6 +5,8 @@ import testData.testDataManagement as tdm
 import statisticScores as statTest
 
 # K Nearest neighbor algorithms. uncomment at bottom of file to test
+
+# testing function
 def testKNN():
     # load test data
     testLabels, testFeatures = tdm.loadTestDataHW("testData/trainingDataHW1.txt")
