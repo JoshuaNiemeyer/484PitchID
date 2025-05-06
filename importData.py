@@ -30,6 +30,9 @@ def testImport():
     # split into validation and training set
     valLabels, valFeatures, trainLabels, trainFeatures = tdm.splitValidationTraining(labels, features, 20)
 
+    print("\nValidation Set Size: " + str(len(valLabels)))
+    print("Training Set Size: " + str(len(trainLabels)))
+
     # # test only on subset of data
     # valLabels = valLabels[0:1000]
     # valFeatures = valFeatures[0:1000]
@@ -38,6 +41,16 @@ def testImport():
 
     print("\nTesting data in Euclidean KNN")
     predictedLabels = KNN.kNearestNeighborsEuclidean(valFeatures, trainLabels, trainFeatures, 10)
+    # print out all scores
+    statisticScores.printAllScores(predictedLabels, valLabels)
+
+    # test other KNN types
+    print("\nTesting data in Manhatten KNN")
+    predictedLabels = KNN.kNearestNeighborsManhatten(valFeatures, trainLabels, trainFeatures, 10)
+    # print out all scores
+    statisticScores.printAllScores(predictedLabels, valLabels)
+    print("\nTesting data in Hamming KNN")
+    predictedLabels = KNN.kNearestNeighborsHamming(valFeatures, trainLabels, trainFeatures, 10)
     # print out all scores
     statisticScores.printAllScores(predictedLabels, valLabels)
 
